@@ -59,6 +59,7 @@ export const useUserDispatcher = () => {
             dispatch(setLoading(false))
         } catch (error) {
             console.log(error)   
+            window.location.href = "/404"
         }
     }
 
