@@ -85,7 +85,10 @@ export const useUserDispatcher = () => {
             dispatch(setLoading(true));
             const response = await callAPI({
                 url:`user/followers`,
-                method: 'get'
+                method: 'get',
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             })
 
             dispatch(setFollowers(response.data))
@@ -99,7 +102,10 @@ export const useUserDispatcher = () => {
             dispatch(setLoading(true));
             const response = await callAPI({
                 url:`user/following`,
-                method: 'get'
+                method: 'get',
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             })
             dispatch(setFollowing(response.data))
             dispatch(setLoading(false));

@@ -47,6 +47,7 @@ export const useAuthDispatcher = () => {
             localStorage.setItem('token', payload.access_token)
             dispatch(setDataLogin(payload))
             dispatch(setLoading(false));
+            window.location.href= '/'
         })
         .catch((err) => {
             console.log(err)
