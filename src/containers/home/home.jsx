@@ -15,20 +15,21 @@ import Repositories from "./elements/repositories"
 const HomeContainer = () => {
     const router = useRouter()
     const {keyword} = router.query
-    const {user, getUser, getFollower, getFollowing} = useUserDispatcher()
-    const {repository, getRepositories} = useRepositoriesDispatcher()
+    const {user, getMydata,getMyFollower, getMyFollowing, getUser, getFollower, getFollowing} = useUserDispatcher()
+    const {repository, getRepositories, getMyRepo} = useRepositoriesDispatcher()
 
     useEffect(() => {
+            
         if (keyword) {
             getUser(keyword)
             getFollower(keyword)
             getFollowing(keyword)
             getRepositories(keyword)
         }else{
-            getUser("imanirv")
-            getFollower("imanirv")
-            getFollowing("imanirv")
-            getRepositories("imanirv")
+            getMydata()
+            getMyRepo()
+            getMyFollower()
+            getMyFollowing()
 
         }
     }, [keyword])

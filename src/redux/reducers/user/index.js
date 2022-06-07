@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 import { callAPI } from "../../../helpers/network";
+import {getToken} from "../../../helpers/auth";
 
 const initialState = {
     userData: [],
@@ -45,7 +46,7 @@ const {setUserData, setFollowing, setFollowers, setLoading} = slices.actions
 export const useUserDispatcher = () => {
     const {user} = useSelector((state) => state);
     const dispatch = useDispatch();
-
+    const token = getToken();
 
     const getUser = async (keyword) => {
         try {
@@ -61,6 +62,51 @@ export const useUserDispatcher = () => {
         }
     }
 
+    const getMydata = async () => {
+        try {
+            dispatch(setLoading(true))
+                const response = await callAPI({
+                    url:'/user',
+                    method: 'get',
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                })
+                dispatch(setUserData(response.data))
+            
+            dispatch(setLoading(false))
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const getMyFollower = async () => {
+        try {
+            dispatch(setLoading(true));
+            const response = await callAPI({
+                url:`user/followers`,
+                method: 'get'
+            })
+
+            dispatch(setFollowers(response.data))
+            dispatch(setLoading(false));
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    const getMyFollowing = async () => {
+        try {
+            dispatch(setLoading(true));
+            const response = await callAPI({
+                url:`user/following`,
+                method: 'get'
+            })
+            dispatch(setFollowing(response.data))
+            dispatch(setLoading(false));
+        } catch (error) {
+            console.log(error)
+        }
+    }
     const getFollower = async (keyword) => {
         try {
             dispatch(setLoading(true));
@@ -91,8 +137,11 @@ export const useUserDispatcher = () => {
 
     return {
         getUser,
+        getMydata,
         getFollower,
         getFollowing,
+        getMyFollower,
+        getMyFollowing,
         user
     }
 
