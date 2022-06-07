@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-
+import {useRouter} from "next/router"
 // load dispatcher 
 import {useUserDispatcher} from "../../redux/reducers/user"
 import { useRepositoriesDispatcher } from "../../redux/reducers/repositories"
@@ -13,20 +13,30 @@ import Repositories from "./elements/repositories"
 
 
 const HomeContainer = () => {
-    const {user: {userData, following, followers}, getUser, getFollower, getFollowing} = useUserDispatcher()
-    const {repository: {repositories}, getRepositories} = useRepositoriesDispatcher()
+    const router = useRouter()
+    const {keyword} = router.query
+    const {user, getUser, getFollower, getFollowing} = useUserDispatcher()
+    const {repository, getRepositories} = useRepositoriesDispatcher()
 
     useEffect(() => {
-        getUser()
-        getFollower()
-        getFollowing()
-        getRepositories()
-    }, [])
+        if (keyword) {
+            getUser(keyword)
+            getFollower(keyword)
+            getFollowing(keyword)
+            getRepositories(keyword)
+        }else{
+            getUser("imanirv")
+            getFollower("imanirv")
+            getFollowing("imanirv")
+            getRepositories("imanirv")
 
+        }
+    }, [keyword])
+    
     return(
        <MainLayout>
-           <Profile userData={userData} followers={followers.length} following={following.length} />
-            <Repositories data={repositories}/>
+           <Profile userData={user.userData} followers={user.followers.length} following={user.following.length} isLoading={user.loading} />
+            <Repositories data={repository.repositories} isLoading={repository.loading}/>
        </MainLayout>
     )
 }

@@ -47,11 +47,11 @@ export const useUserDispatcher = () => {
     const dispatch = useDispatch();
 
 
-    const getUser = async () => {
+    const getUser = async (keyword) => {
         try {
             dispatch(setLoading(true));
             const response = await callAPI({
-                url: `/users/imanirv`,
+                url: `/users/${keyword}`,
                 method: 'get'
             })
             dispatch(setUserData(response.data))
@@ -61,11 +61,11 @@ export const useUserDispatcher = () => {
         }
     }
 
-    const getFollower = async () => {
+    const getFollower = async (keyword) => {
         try {
             dispatch(setLoading(true));
             const response = await callAPI({
-                url:`users/imanirv/followers`,
+                url:`users/${keyword}/followers`,
                 method: 'get'
             })
 
@@ -75,11 +75,11 @@ export const useUserDispatcher = () => {
             console.log(error)
         }
     }
-    const getFollowing = async () => {
+    const getFollowing = async (keyword) => {
         try {
             dispatch(setLoading(true));
             const response = await callAPI({
-                url:`users/imanirv/following`,
+                url:`users/${keyword}/following`,
                 method: 'get'
             })
             dispatch(setFollowing(response.data))

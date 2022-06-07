@@ -34,11 +34,11 @@ export const useRepositoriesDispatcher = () => {
     const dispatch = useDispatch();
 
 
-    const getRepositories = async () => {
+    const getRepositories = async (keyword) => {
         try {
             dispatch(setLoading(true));
             const response = await callAPI({
-                url: `/users/imanirv/repos`,
+                url: `/users/${keyword}/repos`,
                 method: 'get'
             })
             dispatch(setRepositories(response.data))

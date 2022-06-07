@@ -10,6 +10,7 @@ module.exports = {
           2:"#292929",
         },
         disabled: 'rgba(217, 217, 217, 0.6)',
+        border: 'rgba(217, 217, 217, 0.1)',
       },
       fontFamily: {
         inter: ['Inter', 'sans-serif']
