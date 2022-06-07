@@ -12,7 +12,7 @@ module.exports = {
         disabled: 'rgba(217, 217, 217, 0.6)',
       },
       fontFamily: {
-        nunito: ['Inter', 'sans-serif']
+        inter: ['Inter', 'sans-serif']
       }
     },
   },
