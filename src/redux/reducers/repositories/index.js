@@ -56,7 +56,10 @@ export const useRepositoriesDispatcher = () => {
             dispatch(setLoading(true));
             const response = await callAPI({
                 url: `/users/${keyword}/repos?sort=updated`,
-                method: 'get'
+                method: 'get',
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             })
             dispatch(setRepositories(response.data))
             dispatch(setLoading(false))

@@ -53,7 +53,10 @@ export const useUserDispatcher = () => {
             dispatch(setLoading(true));
             const response = await callAPI({
                 url: `/users/${keyword}`,
-                method: 'get'
+                method: 'get',
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             })
             dispatch(setUserData(response.data))
             dispatch(setLoading(false))
@@ -119,7 +122,10 @@ export const useUserDispatcher = () => {
             dispatch(setLoading(true));
             const response = await callAPI({
                 url:`users/${keyword}/followers`,
-                method: 'get'
+                method: 'get',
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             })
 
             dispatch(setFollowers(response.data))
@@ -133,7 +139,10 @@ export const useUserDispatcher = () => {
             dispatch(setLoading(true));
             const response = await callAPI({
                 url:`users/${keyword}/following`,
-                method: 'get'
+                method: 'get',
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             })
             dispatch(setFollowing(response.data))
             dispatch(setLoading(false));
