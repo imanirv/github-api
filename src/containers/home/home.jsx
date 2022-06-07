@@ -30,7 +30,6 @@ const HomeContainer = () => {
             getMyRepo()
             getMyFollower()
             getMyFollowing()
-
         }
     }, [keyword])
     

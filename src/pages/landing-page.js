@@ -1,11 +1,19 @@
-import { useAuthDispatcher } from "../redux/reducers/auth"
+import Head from "next/head"
+import LandingContainer from "../containers/landing"
 import { NoAuthProvider } from "../providers/auth"
 const LandingPage = () => {
-    const {doLogin} = useAuthDispatcher()
+    
   return(
-      <NoAuthProvider>
-        <button onClick={() => doLogin()}>Sign in with github</button>
-      </NoAuthProvider>
+
+      <>
+        <Head>
+          <title>github api - homepage</title>
+        </Head>
+        <NoAuthProvider>
+          <LandingContainer />
+          
+        </NoAuthProvider>
+      </>
   )
 }
 
